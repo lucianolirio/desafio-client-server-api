@@ -32,11 +32,8 @@ type Cotacao struct {
 }
 
 func main() {
-
 	http.HandleFunc("/cotacao", cotacaoDolarHandler)
-
 	http.ListenAndServe(":8080", nil)
-	//fmt.Println(cotacaoDolar())
 }
 
 func cotacaoDolarHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,6 +49,10 @@ func cotacaoDolarHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte(moeda.USDBRL.Bid))
 		}
+	}
+
+	if err != nil {
+		panic(err)
 	}
 }
 
