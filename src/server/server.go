@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"time"
@@ -40,12 +41,12 @@ func cotacaoDolarHandler(w http.ResponseWriter, r *http.Request) {
 	moeda, err := cotacaoDolar()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		panic(err)
+		fmt.Println(err.Error())
 	} else {
 		err = salvarCotacao(&moeda.USDBRL)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			panic(err)
+			fmt.Println(err.Error())
 		} else {
 			w.Header().Set("Content-Type", "application/json")
 			w.WriteHeader(http.StatusOK)
