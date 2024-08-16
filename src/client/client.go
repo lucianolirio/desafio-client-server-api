@@ -39,14 +39,14 @@ func valorDolar() (string, error) {
 
 func escreveCotacao(valor string) {
 	f, err := os.Create("cotacao.txt")
+
 	if err != nil {
 		panic(err)
 	}
 
+	defer f.Close()
 	_, err = f.WriteString(fmt.Sprintf("Dólar: %s\n", valor))
 	if err != nil {
 		panic(err)
 	}
-
-	f.Close()
 }
